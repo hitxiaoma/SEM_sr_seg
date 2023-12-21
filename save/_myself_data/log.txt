@@ -1,0 +1,13 @@
+train dataset: size=30
+  inp: shape=(3, 64, 64)
+  coord: shape=(1024, 2)
+  cell: shape=(1024, 2)
+  gt: shape=(1024, 3)
+val dataset: size=10
+  inp: shape=(3, 64, 64)
+  coord: shape=(1024, 2)
+  cell: shape=(1024, 2)
+  gt: shape=(1024, 3)
+model: #params=39.2M
+epoch 1/2, train: loss=0.1357, val: psnr=17.6926, 45.9s 45.9s/1.5m
+epoch 2/2, train: loss=0.0924, val: psnr=18.5612, 14.0s 59.9s/59.9s

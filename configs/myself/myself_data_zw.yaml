@@ -1,0 +1,71 @@
+train_dataset:
+  dataset:
+    name: paired-image-folders
+    args:
+      #root_path_1:存放的是低精度图片
+      root_path_1: configs/train_HR #./load/celebAHQ/32
+      #root_path_2：存放的是高精度图片
+      root_path_2: configs/test_HR #./load/celebAHQ/256
+      #split_file可以不使用
+      split_file:  #./load/celebAHQ/split.json
+      split_key: train
+      #cache：数据读入时的格式，无需修改，若样本为常用图片格式，该工程自行处理
+      cache: bin
+  wrapper:
+    name: sr-implicit-uniform-varied
+    args:
+      #size_min：LR分辨率，根据训练样本来设置
+      size_min: 64
+      #size_max：HR分辨率，根据训练样本来设置
+      size_max: 256
+      #sample_q：采样数量
+      sample_q: 1024
+      #augment：是否进行数据增强
+      augment: true
+  #batch_size：训练时，批处理图片数量
+  batch_size: 4
+
+val_dataset:
+  dataset:
+    name: paired-image-folders
+    args:
+      root_path_1: ./test/img_ok_16_160 #./load/celebAHQ/32
+      root_path_2: ./test/img_ok_64_640 #./load/celebAHQ/256
+      split_file:  #./load/celebAHQ/split.json
+      split_key: val
+      first_k: 100
+      cache: bin
+  wrapper:
+    name: sr-implicit-paired
+    args:
+      sample_q: 1024
+  batch_size: 1
+
+data_norm:
+  inp: {sub: [0.5], div: [0.5]}
+  gt: {sub: [0.5], div: [0.5]}
+
+model:
+  name: liif
+  args:
+    encoder_spec:
+      name: edsr #edsr-baseline #网络结构的名字 候选项：edsr
+      args:
+        no_upsampling: true
+    imnet_spec:
+      name: mlp
+      args:
+        out_dim: 3
+        hidden_list: [256, 256, 256, 256]
+
+optimizer:
+  name: adam #优化方式
+  args:
+    lr: 1.e-4 #基础学习率
+epoch_max: 200 #训练最大的epochs
+multi_step_lr:
+  milestones: [100]
+  gamma: 0.1
+
+epoch_val: 1 #间隔多少个epoch进行模型验证
+epoch_save: 100 #间隔多少个epoch保存
