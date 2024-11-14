@@ -1,28 +1,33 @@
 # SEM_sr_seg
-这是一个混凝土SEM图像超分辨率重构与物相分割的项目。
+This is a project for super-resolution reconstruction and phase segmentation of concrete SEM images.
 
-使用说明如下：
+Instructions for use are as follows:
 
-1. 下载代码
+1.Download the code.
 
-2. 下载权重文件，并放入到checkpoints文件夹内
-权重文件下载链接如
-链接：https://pan.baidu.com/s/1yFyV4YIz4HP_VInypzNwHw 
-提取码：mqbk 
+2.Download the weights file and place it in the checkpoints folder. The download link for the weights file is as follows:
+  Link: https://pan.baidu.com/s/1yFyV4YIz4HP_VInypzNwHw
+  Access code: mqbk
 
-3. 在终端或anaconda prompt里进入到本项目所在的路径下，输入如下代码：
-python software.py
-即可打开软件界面，之后操作按照使用手册即可（操作手册由于还未发表，暂不公开）。
+3.In the terminal or Anaconda Prompt, navigate to the path where this project is located, and enter the following command:
 
-注：
-需要按照如下要求配置相应环境，否则代码无法顺利运行：
+  python software.py
+
+  This will open the software interface.
+
+Note: The environment must be configured as specified below for the code to run smoothly:
+
+Required packages:
+
 pytorch==1.12.1
 mmcv==1.6.2
 timm==0.4.12
-以及一些基础包的安装：
-Numpy
+
+Basic package installations:
+
+numpy
 PIL
 matplotlib
 pandas
 tkinter
-等
+
